@@ -16,7 +16,14 @@ namespace ProP_Inf
     {
         static void Main(string[] args)
         {
-            GetFileDescription(args[0]);
+            GetFileDescription();
+            int count = args.Count();
+            if (count > 0)
+            {
+                GetFileDescription(args[0]);
+            }
+            else Console.WriteLine("exe path required");
+            Console.ReadKey();
         }
         private static void GetFileDescription(string path = "C:\\Users\\aravi\\OneDrive\\Desktop\\EXE\\AsusAgni.exe")
         {
@@ -31,10 +38,10 @@ namespace ProP_Inf
 
             var in_fo = new
             {
-                @info,
-                version = info.FileVersion,
-                ProductVersion = info.ProductVersion,
-                ProductName = info.ProductName
+               @info,
+                //version = info.FileVersion,
+                //ProductVersion = info.ProductVersion,
+                //ProductName = info.ProductName
             };
             Console.WriteLine(in_fo.ToString()); Console.WriteLine();
 
@@ -53,17 +60,17 @@ namespace ProP_Inf
 
             var info = new
             {
-                @certificate,
-                Certificate = certificate.Version,
-                Issuer = certificate.Issuer,
-                Subject = certificate.Subject,
-                FriendlyName = certificate.FriendlyName,
+               @certificate,
+                //Certificate = certificate.Version,
+                //Issuer = certificate.Issuer,
+                //Subject = certificate.Subject,
+                //FriendlyName = certificate.FriendlyName,
 
-                SerialNumber = certificate.SerialNumber,
-                NotAfter = certificate.NotAfter,
-                NotBefore = certificate.NotBefore,
-                SignatureAlgorithm = certificate.SignatureAlgorithm,
-                certificateisvalie = chainIsValid
+                //SerialNumber = certificate.SerialNumber,
+                //NotAfter = certificate.NotAfter,
+                //NotBefore = certificate.NotBefore,
+                //SignatureAlgorithm = certificate.SignatureAlgorithm,
+                certificateisvalid = chainIsValid
             };
             Console.WriteLine(info);
             Console.WriteLine();
@@ -74,7 +81,7 @@ namespace ProP_Inf
             FileInfo fi = new FileInfo(FilePath);
             var info = new
             {
-                @fi,
+                // @fi,
                 name = fi.Name,
                 CreationTime = fi.CreationTime.ToString(),
                 modifiedTime = fi.LastWriteTime.ToString(),
