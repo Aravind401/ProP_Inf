@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Remoting.Channels;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,12 +31,12 @@ namespace ProP_Inf
 
             var in_fo = new
             {
-
+                @info,
                 version = info.FileVersion,
                 ProductVersion = info.ProductVersion,
                 ProductName = info.ProductName
             };
-            Console.WriteLine(in_fo.ToString());
+            Console.WriteLine(in_fo.ToString()); Console.WriteLine();
 
         }
         static void GetSigningDetails(string FilePath)
@@ -49,7 +50,23 @@ namespace ProP_Inf
             };
 
             var chainIsValid = certificateChain.Build(certificate);
-            Console.WriteLine("certificate valid check {0}", chainIsValid);
+
+            var info = new
+            {
+                @certificate,
+                Certificate = certificate.Version,
+                Issuer = certificate.Issuer,
+                Subject = certificate.Subject,
+                FriendlyName = certificate.FriendlyName,
+
+                SerialNumber = certificate.SerialNumber,
+                NotAfter = certificate.NotAfter,
+                NotBefore = certificate.NotBefore,
+                SignatureAlgorithm = certificate.SignatureAlgorithm,
+                certificateisvalie = chainIsValid
+            };
+            Console.WriteLine(info);
+            Console.WriteLine();
         }
         static void getFileInformation(string FilePath)
         {
@@ -57,6 +74,7 @@ namespace ProP_Inf
             FileInfo fi = new FileInfo(FilePath);
             var info = new
             {
+                @fi,
                 name = fi.Name,
                 CreationTime = fi.CreationTime.ToString(),
                 modifiedTime = fi.LastWriteTime.ToString(),
